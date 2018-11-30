@@ -1,0 +1,26 @@
+
+CNET mskim3494
+
+# Note to graders:
+# I have all of my work in code, uploaded as Q1.py. I included commented explanations of my work.
+
+# Problem 1:
+key= 'SNOWDEN'
+
+I had much trouble solving this problem, so I did problem 2 first. This gave me insight into how to solve it.
+First I investigated how a Kasiski attack worked. From question 2e, we see that at any multiple of the length of the key,
+the mean variance population drastically increases. Analyzing the variances of key_len = (1,10), we can see that 7 is a disparity. This could be confirmed by looking at the variances of 14 and 21. Then, as in a Kasiski attack, I conducted frequency analysis, dividing the text every 7th letter (getting a total of 7 texts). The most or second most popular letter would most likely be mapped to the letter E, as in the English language in general. Calculated the offset of each letter so that E would be mapped to each specific letter, and then run it through a Vigenere decipher code. As is visible in the code snippet, Q1.py, my first attempts were miserable, giving me no insight, but when I got within 2 wrong letters, I could clearly see patterns. Trial and error got me 'SNOWDEN'
+
+# Problem 2:
+
+part_a_var_english=0.0010456
+part_b_var_plaintext=0.009405
+part_c_var_ciphertexts=[0.00059858, 0.000348026, 0.00026268, 0.00024141, 0.00020471]
+part_c_explain= We can see that as the key length increases, the mean population variance decreases. This would mean that this would make it look more random and therefore undecipherable. 
+part_d_means=[0.0092638, 0.0098212, 0.0098834, 0.0010002, 0.0010517]
+part_d_explain= The variance has (relatively) increase for each key length (compared to part c). All of them are very close together, with not that much difference with the result from part b. This makes sense, because as we split the text by every k Caesar cipher, each is getting moved by the same offset, which means that variance would be the same as the original text. 
+part_e_means=[0.0003549, 0.0004880, 0.0004327, 0.0003103]
+part_e_explain= The variances are visibly smaller than that of k = 6. This means that there is spike in population variance when it is calculated at its key length. Further examination for k = 12, 18 also suggest that variance increases for any multiple of the key length. I do believe that this could be a variant. In the Kasiski attack, the attacker has to manually analyze the spaces between the repeating binomial/trinomials, and then find key_len based on a common divider to most of the numbers obtained. This is, in reality, looking for repeated frequencies of letters within the text. This offers a much faster and easier way of obtaining the key length.
+
+
+
